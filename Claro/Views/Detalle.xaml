@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="Claro.Views.Detalle"
+    x:Name="PaginaDetalle"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Claro.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Detalle, Source={StaticResource Locator}}"
+    >
+    <ScrollViewer>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" DataContext="{Binding Pelicula}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <Button Command="{Binding ElementName=PaginaDetalle, Path=DataContext.RegresaCommand}">Regresa</Button>
+                <Image Height="590" Width="460">
+                    <ToolTipService.ToolTip>
+                        <TextBlock Text="{Binding title}"/>
+                    </ToolTipService.ToolTip>
+                    <Image.Source>
+                        <BitmapImage UriSource="{Binding image_medium}" />
+                    </Image.Source>
+                </Image>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="0 200 0 0">
+                <TextBlock Text="{Binding title}" Foreground="Orange" FontSize="20" FontWeight="Bold"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding title_original}" />
+                    <TextBlock Text=" ("/>
+                    <TextBlock Text="{Binding year}"/>
+                    <TextBlock Text=") "/>
+                    <TextBlock Text="{Binding rating_code}"/>
+                </StackPanel>
+                <TextBlock Text="{Binding description_large}" TextWrapping="Wrap"></TextBlock>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

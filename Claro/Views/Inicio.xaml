@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="Claro.Views.Inicio"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+    xmlns:local="using:Claro.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Name="Pagina"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Inicio, Source={StaticResource Locator}}"  
+    >
+    <ScrollViewer>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <StackPanel>
+                <TextBox Margin="5" Text="{Binding Path=Filter, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                <Border Grid.Row="0" >
+                    <ItemsControl x:Name="StreamsItemsControl" ItemsSource="{Binding Peliculas}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <controls:UniformGrid x:Name="PeliculasGrid"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="3">
+                                    <Button Command="{Binding ElementName=Pagina, Path=DataContext.VerdetalleCommand}" CommandParameter="{Binding id}">
+                                        <Image Height="163" Width="290">
+                                            <ToolTipService.ToolTip>
+                                                <TextBlock Text="{Binding title}"/>
+                                            </ToolTipService.ToolTip>
+                                            <Image.Source>
+                                                <BitmapImage UriSource="{Binding image_small}" />
+                                            </Image.Source>
+                                        </Image>
+                                    </Button>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>
